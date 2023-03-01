@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    tools:context=".fragments.add.AddFragment">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/content_et"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+        <EditText
+            android:id="@+id/filename_et"
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:background="@drawable/custom_input"
+            android:ems="10"
+            android:hint="@string/filename"
+            android:inputType="textPersonName"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end" >
+            <Spinner
+                android:id="@+id/file_type_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:background="@drawable/custom_input"
+                android:entries="@array/file_type"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/content_et"
+        android:layout_width="363dp"
+        android:layout_height="615dp"
+        android:background="@drawable/custom_input"
+        android:ems="10"
+        android:gravity="top|start"
+        android:hint="@string/content"
+        android:inputType="textMultiLine"
+        android:paddingStart="24dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="24dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

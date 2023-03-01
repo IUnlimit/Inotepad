@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Inotepad</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="no_data">No Data</string>
+    <string name="filename">FileName</string>
+    <string name="content">Content</string>
+
+    <string-array name="file_type">
+        <item>.txt</item>
+        <item>.md</item>
+        <item>.json</item>
+    </string-array>
 </resources>
