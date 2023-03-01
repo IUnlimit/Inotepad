@@ -1,3 +1,5 @@
+# https://ameow.xyz/archives/android-cicd-with-github-actions
+
 name: CI Release
 
 on:
