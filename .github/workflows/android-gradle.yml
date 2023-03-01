@@ -4,7 +4,9 @@ name: CI Release
 
 on:
   # 在有tag被push，且tag是以v开头时，运行这个action。
-  # example: v0.0.1-beta
+  # example:
+  #   - git tag v0.0.1-beta
+  #   - git push --tags
   push:
     tags:
       - "v*"
