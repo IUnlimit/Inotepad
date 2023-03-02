@@ -7,7 +7,6 @@
     android:id="@+id/list_layout"
     tools:context=".fragments.list.ListFragment">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="409dp"
@@ -19,24 +18,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <ImageView
-        android:id="@+id/np_data_imageView"
+        android:id="@+id/no_data_imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_no_data"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/recycler_view"
         app:layout_constraintStart_toStartOf="@+id/recycler_view"
@@ -44,15 +31,53 @@
         app:layout_constraintVertical_bias="0.32999998" />
 
     <TextView
-        android:id="@+id/np_data_textView"
+        android:id="@+id/no_data_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="@string/no_data"
         android:textSize="16sp"
         android:alpha="0.5"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/recycler_view"
         app:layout_constraintStart_toStartOf="@+id/recycler_view"
-        app:layout_constraintTop_toBottomOf="@+id/np_data_imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/no_data_imageView" />
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:menu_icon="@drawable/ic_menu"
+        app:menu_colorNormal="@color/teal_200"
+        app:menu_colorPressed="@color/teal_700"
+        app:menu_fab_size="normal"
+        app:menu_showShadow="true">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_search"
+            app:fab_colorNormal="@color/teal_200"
+            app:fab_colorPressed="@color/teal_700"
+            app:fab_label="Search"
+            app:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            app:fab_colorNormal="@color/teal_200"
+            app:fab_colorPressed="@color/teal_700"
+            app:fab_label="Create"
+            app:fab_size="mini" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

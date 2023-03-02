@@ -13,18 +13,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        setupActionBarWithNavController(supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment)!!.findNavController())
-
-    }
-
-    override fun onNavigateUp(): Boolean {
-        Log.d("Inotepad", "onNavigateUp")
-//        val navController = findNavController(R.id.nav_host_fragment)
-        val navController = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment)!!.findNavController()
-        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
 }

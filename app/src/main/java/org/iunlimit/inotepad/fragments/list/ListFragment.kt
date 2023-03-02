@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.github.clans.fab.FloatingActionButton
 import org.iunlimit.inotepad.R
 
 class ListFragment : Fragment() {
@@ -20,7 +20,7 @@ class ListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_list, container, false)
 
         // FloatingActionButton click listener
-        view.findViewById<FloatingActionButton>(R.id.floatingActionButton).setOnClickListener {
+        view.findViewById<FloatingActionButton>(R.id.menu_create).setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
         }
 

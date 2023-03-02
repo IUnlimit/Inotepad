@@ -61,4 +61,7 @@ dependencies {
     // Jetpack Compose Integration
     implementation "androidx.navigation:navigation-compose:$nav_version"
 
+    // 悬浮按钮菜单库
+    implementation 'com.github.clans:fab:1.6.4'
+
 }
