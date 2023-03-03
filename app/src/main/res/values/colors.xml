@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <!-- https://blog.csdn.net/u013058160/article/details/49158779 -->
     <color name="lightGray">#90505050</color>
+    <color name="darkGray">#808080</color>
+    <color name="red">#FF0000</color>
 </resources>

@@ -54,6 +54,7 @@
            android:id="@+id/current_content_et"
            android:layout_width="363dp"
            android:layout_height="680dp"
+           android:layout_marginTop="44dp"
            android:background="@drawable/custom_input"
            android:ems="10"
            android:gravity="top|start"
@@ -62,9 +63,8 @@
            android:paddingStart="24dp"
            android:paddingTop="16dp"
            android:paddingEnd="24dp"
-           android:layout_marginTop="16dp"
            app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.5"
+           app:layout_constraintHorizontal_bias="0.0"
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintTop_toBottomOf="@+id/current_linearLayout" />
 
