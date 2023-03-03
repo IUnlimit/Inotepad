@@ -3,6 +3,11 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
 android {
     namespace 'org.iunlimit.inotepad'
     compileSdk 33
@@ -23,10 +28,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -42,26 +53,43 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    var nav_version = "2.5.3"
-
-    // Java language implementation
-    implementation "androidx.navigation:navigation-fragment:$nav_version"
-    implementation "androidx.navigation:navigation-ui:$nav_version"
-
-    // Kotlin
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-
-    // Feature module Support
-    implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
-
-    // Testing Navigation
-    androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
-
-    // Jetpack Compose Integration
-    implementation "androidx.navigation:navigation-compose:$nav_version"
-
     // 悬浮按钮菜单库
     implementation 'com.github.clans:fab:1.6.4'
+
+    dependencies {
+        var dialog_version = "3.3.0"
+        implementation "com.afollestad.material-dialogs:core:$dialog_version"
+        implementation "com.afollestad.material-dialogs:input:$dialog_version"
+        implementation "com.afollestad.material-dialogs:files:$dialog_version"
+    }
+
+
+    dependencies {
+        var nav_version = "2.5.3"
+        // Java language implementation
+        implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+        implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+        // Kotlin
+        implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+        implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+        // Feature module Support
+        implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
+        // Testing Navigation
+        androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
+        // Jetpack Compose Integration
+        implementation "androidx.navigation:navigation-compose:$nav_version"
+    }
+
+    dependencies {
+        var room_version = "2.5.0"
+        implementation("androidx.room:room-runtime:$room_version")
+        annotationProcessor("androidx.room:room-compiler:$room_version")
+        // To use Kotlin annotation processing tool (kapt)
+        kapt("androidx.room:room-compiler:$room_version")
+        // optional - Kotlin Extensions and Coroutines support for Room
+        implementation("androidx.room:room-ktx:$room_version")
+        // optional - Test helpers
+        testImplementation("androidx.room:room-testing:$room_version")
+    }
 
 }
