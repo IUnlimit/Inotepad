@@ -1,22 +1,22 @@
 package org.iunlimit.inotepad.fragments.update
 
+import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.Spinner
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.afollestad.materialdialogs.MaterialDialog
-import com.github.clans.fab.FloatingActionButton
 import org.iunlimit.inotepad.R
 import org.iunlimit.inotepad.data.models.FileData
 import org.iunlimit.inotepad.data.models.FileType
 import org.iunlimit.inotepad.data.viewmodel.FileViewModel
+import org.iunlimit.inotepad.databinding.FragmentUpdateBinding
 import org.iunlimit.inotepad.fragments.SharedViewModel
 
 class UpdateFragment : Fragment() {
@@ -25,37 +25,46 @@ class UpdateFragment : Fragment() {
     private val sharedViewModel: SharedViewModel by viewModels()
     private val args by navArgs<UpdateFragmentArgs>()
 
+    private var _binding: FragmentUpdateBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_update, container, false)
+        _binding = FragmentUpdateBinding.inflate(inflater, container, false)
+        binding.args = args
 
-        view.findViewById<EditText>(R.id.current_filename_et).setText(args.currentItem.name)
-        view.findViewById<EditText>(R.id.current_content_et).setText(args.currentItem.content)
-        val spinnerView = view.findViewById<Spinner>(R.id.current_file_type_spinner)
-        spinnerView.setSelection(args.currentItem.type.ordinal)
-        spinnerView.onItemSelectedListener = sharedViewModel.listener
+        // Spinner item selected spinner
+        binding.currentFileTypeSpinner.onItemSelectedListener = sharedViewModel.listener
 
         // FloatingActionButton click listener
-        view.findViewById<FloatingActionButton>(R.id.update_menu_save).setOnClickListener {
-            if (!updateData(view)) return@setOnClickListener
+        binding.updateMenuSave.setOnClickListener {
+            if (!updateData()) return@setOnClickListener
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)
         }
 
         // FloatingActionButton click listener
-        view.findViewById<FloatingActionButton>(R.id.update_menu_delete).setOnClickListener {
-            deleteData(args.currentItem)
+        binding.updateMenuDelete.setOnClickListener {
+            needConfirmDeleteData(args.currentItem, viewModel,requireContext()) {
+                if (!it) return@needConfirmDeleteData
+                findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+            }
         }
 
-        return view
+        return binding.root
     }
 
-    private fun updateData(view: View): Boolean {
-        val filename = view.findViewById<EditText>(R.id.current_filename_et).text.toString()
-        val fileType = view.findViewById<Spinner>(R.id.current_file_type_spinner).selectedItem.toString()
-        val content = view.findViewById<EditText>(R.id.current_content_et).text.toString()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun updateData(): Boolean {
+        val filename = binding.currentFilenameEt.text.toString()
+        val fileType = binding.currentFileTypeSpinner.selectedItem.toString()
+        val content = binding.currentContentEt.text.toString()
 
         if (TextUtils.isEmpty(filename) || TextUtils.isEmpty(content)) {
             MaterialDialog(requireContext()).show {
@@ -74,20 +83,26 @@ class UpdateFragment : Fragment() {
         return true
     }
 
-    private fun deleteData(fileData: FileData) {
-        MaterialDialog(requireContext()).show {
-            title(R.string.delete_confirm)
-            message(text = "即将删除 '${fileData.name}' ！")
-            positiveButton(R.string.cancel)
-            negativeButton(R.string.confirm) {
-                viewModel.deleteData(fileData)
-                MaterialDialog(requireContext()).show {
-                    title(R.string.delete_success)
-                    positiveButton(R.string.ok)
+    companion object {
+
+        fun needConfirmDeleteData(fileData: FileData, viewModel: FileViewModel, ctx: Context, callback: ((Boolean) -> Unit)?) {
+            MaterialDialog(ctx).show {
+                title(R.string.delete_confirm)
+                message(text = "即将删除 '${fileData.name}' ！")
+                positiveButton(R.string.cancel) {
+                    callback?.let { func -> func(false) }
                 }
-                findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+                negativeButton(R.string.confirm) {
+                    viewModel.deleteData(fileData)
+                    MaterialDialog(ctx).show {
+                        title(R.string.delete_success)
+                        positiveButton(R.string.ok)
+                    }
+                    callback?.let { func -> func(true) }
+                }
             }
         }
+
     }
 
 }

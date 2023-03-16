@@ -1,108 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.update.UpdateFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-   <androidx.constraintlayout.widget.ConstraintLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:layout_margin="24dp">
+    <data>
+        <variable
+            name="args"
+            type="org.iunlimit.inotepad.fragments.update.UpdateFragmentArgs" />
+    </data>
 
-       <LinearLayout
-           android:id="@+id/current_linearLayout"
-           android:layout_width="0dp"
-           android:layout_height="60dp"
-           android:orientation="horizontal"
-           app:layout_constraintBottom_toTopOf="@+id/current_content_et"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.5"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toTopOf="parent"
-           app:layout_constraintVertical_bias="0.5">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.update.UpdateFragment">
 
-           <EditText
-               android:id="@+id/current_filename_et"
-               android:layout_width="wrap_content"
-               android:layout_height="60dp"
-               android:background="@drawable/custom_input"
-               android:ems="10"
-               android:hint="@string/filename"
-               android:inputType="textPersonName"
-               android:paddingStart="24dp"
-               android:paddingEnd="24dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="24dp">
 
-           <LinearLayout
-               android:layout_width="fill_parent"
-               android:layout_height="wrap_content"
-               android:gravity="end" >
-               <Spinner
-                   android:id="@+id/current_file_type_spinner"
-                   android:layout_width="wrap_content"
-                   android:layout_height="60dp"
-                   android:background="@drawable/custom_input"
-                   android:entries="@array/file_type"
-                   android:paddingStart="20dp"
-                   android:paddingEnd="20dp" />
-           </LinearLayout>
+            <LinearLayout
+                android:id="@+id/current_linearLayout"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/current_content_et"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5">
 
-       </LinearLayout>
+                <EditText
+                    android:id="@+id/current_filename_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:background="@drawable/custom_input"
+                    android:ems="10"
+                    android:hint="@string/filename"
+                    android:inputType="textPersonName"
+                    android:text="@{args.currentItem.name}"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp" />
 
-       <EditText
-           android:id="@+id/current_content_et"
-           android:layout_width="363dp"
-           android:layout_height="680dp"
-           android:layout_marginTop="44dp"
-           android:background="@drawable/custom_input"
-           android:ems="10"
-           android:gravity="top|start"
-           android:hint="@string/content"
-           android:inputType="textMultiLine"
-           android:paddingStart="24dp"
-           android:paddingTop="16dp"
-           android:paddingEnd="24dp"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.0"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/current_linearLayout" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end">
 
-       <com.github.clans.fab.FloatingActionMenu
-           android:id="@+id/update_menu"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_gravity="bottom|end"
-           app:layout_constraintBottom_toBottomOf="parent"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:menu_icon="@drawable/ic_menu"
-           app:menu_colorNormal="@color/teal_200"
-           app:menu_colorPressed="@color/teal_700"
-           app:menu_fab_size="normal"
-           app:menu_showShadow="true">
+                    <Spinner
+                        android:id="@+id/current_file_type_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="60dp"
+                        android:background="@drawable/custom_input"
+                        android:entries="@array/file_type"
+                        android:parseType="@{args.currentItem.type.ordinal()}"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp" />
+                </LinearLayout>
 
-           <com.github.clans.fab.FloatingActionButton
-               android:id="@+id/update_menu_delete"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:src="@drawable/ic_delete"
-               app:fab_colorNormal="@color/teal_200"
-               app:fab_colorPressed="@color/teal_700"
-               app:fab_label="Delete"
-               app:fab_size="mini" />
+            </LinearLayout>
 
-           <com.github.clans.fab.FloatingActionButton
-               android:id="@+id/update_menu_save"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:src="@drawable/ic_save"
-               app:fab_colorNormal="@color/teal_200"
-               app:fab_colorPressed="@color/teal_700"
-               app:fab_label="Save"
-               app:fab_size="mini" />
+            <EditText
+                android:id="@+id/current_content_et"
+                android:layout_width="fill_parent"
+                android:layout_height="680dp"
+                android:background="@drawable/custom_input"
+                android:ems="10"
+                android:gravity="top|start"
+                android:hint="@string/content"
+                android:inputType="textMultiLine"
+                android:text="@{args.currentItem.content}"
+                android:paddingStart="24dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="24dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/current_linearLayout" />
 
-       </com.github.clans.fab.FloatingActionMenu>
+            <com.github.clans.fab.FloatingActionMenu
+                android:id="@+id/update_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:menu_icon="@drawable/ic_menu"
+                app:menu_colorNormal="@color/teal_200"
+                app:menu_colorPressed="@color/teal_700"
+                app:menu_fab_size="normal"
+                app:menu_showShadow="true">
 
-   </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/update_menu_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_delete"
+                    app:fab_colorNormal="@color/teal_200"
+                    app:fab_colorPressed="@color/teal_700"
+                    app:fab_label="Delete"
+                    app:fab_size="mini" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/update_menu_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_save"
+                    app:fab_colorNormal="@color/teal_200"
+                    app:fab_colorPressed="@color/teal_700"
+                    app:fab_label="Save"
+                    app:fab_size="mini" />
+
+            </com.github.clans.fab.FloatingActionMenu>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
