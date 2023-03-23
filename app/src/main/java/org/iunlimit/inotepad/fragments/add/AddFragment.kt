@@ -14,7 +14,9 @@ import org.iunlimit.inotepad.data.models.FileData
 import org.iunlimit.inotepad.data.models.FileType
 import org.iunlimit.inotepad.data.viewmodel.FileViewModel
 import org.iunlimit.inotepad.databinding.FragmentAddBinding
+import org.iunlimit.inotepad.fragments.FontArrayAdapter
 import org.iunlimit.inotepad.fragments.SharedViewModel
+import org.iunlimit.inotepad.fragments.setFont
 
 class AddFragment : Fragment() {
 
@@ -31,7 +33,7 @@ class AddFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentAddBinding.inflate(inflater, container, false)
 
-        binding.fileTypeSpinner.onItemSelectedListener = sharedViewModel.listener
+        binding.fileTypeSpinner.adapter = FontArrayAdapter(requireContext(), R.id.spinner_layout, resources.getStringArray(R.array.file_type))
 
         // FloatingActionButton click listener
         binding.addCheck.setOnClickListener {
@@ -40,6 +42,12 @@ class AddFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setFont(requireView().findViewById(R.id.filename_et))
+        setFont(requireView().findViewById(R.id.content_et))
     }
 
     private fun insertData(): Boolean {
@@ -55,7 +63,7 @@ class AddFragment : Fragment() {
             return false
         }
 
-        val fileData = FileData(0, filename, FileType.parse(fileType), content)
+        val fileData = FileData(0, filename, FileType.parse(fileType), content, null)
         viewModel.insertData(fileData)
         MaterialDialog(requireContext()).show {
             title(R.string.insert_success)

@@ -8,10 +8,16 @@ import androidx.recyclerview.widget.RecyclerView
 import org.iunlimit.inotepad.data.models.FileData
 import org.iunlimit.inotepad.databinding.RowLayoutBinding
 import org.iunlimit.inotepad.fragments.list.ListFragmentDirections
+import org.iunlimit.inotepad.fragments.setFont
 
 class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     var dataList = emptyList<FileData>()
+
+    override fun onViewAttachedToWindow(holder: ListViewHolder) {
+        setFont(holder.binding.nameText)
+        setFont(holder.binding.contentText)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         return ListViewHolder.from(parent)

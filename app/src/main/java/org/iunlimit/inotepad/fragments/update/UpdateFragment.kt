@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.afollestad.materialdialogs.MaterialDialog
@@ -17,7 +16,9 @@ import org.iunlimit.inotepad.data.models.FileData
 import org.iunlimit.inotepad.data.models.FileType
 import org.iunlimit.inotepad.data.viewmodel.FileViewModel
 import org.iunlimit.inotepad.databinding.FragmentUpdateBinding
+import org.iunlimit.inotepad.fragments.FontArrayAdapter
 import org.iunlimit.inotepad.fragments.SharedViewModel
+import org.iunlimit.inotepad.fragments.setFont
 
 class UpdateFragment : Fragment() {
 
@@ -37,7 +38,7 @@ class UpdateFragment : Fragment() {
         binding.args = args
 
         // Spinner item selected spinner
-        binding.currentFileTypeSpinner.onItemSelectedListener = sharedViewModel.listener
+        binding.currentFileTypeSpinner.adapter = FontArrayAdapter(requireContext(), R.id.spinner_layout, resources.getStringArray(R.array.file_type))
 
         // FloatingActionButton click listener
         binding.updateMenuSave.setOnClickListener {
@@ -47,13 +48,19 @@ class UpdateFragment : Fragment() {
 
         // FloatingActionButton click listener
         binding.updateMenuDelete.setOnClickListener {
-            needConfirmDeleteData(args.currentItem, viewModel,requireContext()) {
+            needConfirmDeleteData(args.currentItem, viewModel, requireContext()) {
                 if (!it) return@needConfirmDeleteData
                 findNavController().navigate(R.id.action_updateFragment_to_listFragment)
             }
         }
 
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setFont(requireView().findViewById(R.id.current_filename_et))
+        setFont(requireView().findViewById(R.id.current_content_et))
     }
 
     override fun onDestroyView() {
@@ -74,7 +81,7 @@ class UpdateFragment : Fragment() {
             return false
         }
 
-        val fileData = FileData(args.currentItem.id, filename, FileType.parse(fileType), content)
+        val fileData = FileData(args.currentItem.id, filename, FileType.parse(fileType), content, args.currentItem.filePath)
         viewModel.updateData(fileData)
         MaterialDialog(requireContext()).show {
             title(R.string.update_success)
