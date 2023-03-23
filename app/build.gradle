@@ -53,8 +53,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
+//    implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
     // 悬浮按钮菜单库
     implementation 'com.github.clans:fab:1.6.4'
+    implementation 'io.github.molihuan:pathselector:1.1.14'
 
     dependencies {
         var dialog_version = "3.3.0"
@@ -62,7 +64,6 @@ dependencies {
         implementation "com.afollestad.material-dialogs:input:$dialog_version"
         implementation "com.afollestad.material-dialogs:files:$dialog_version"
     }
-
 
     dependencies {
         var nav_version = "2.5.3"
