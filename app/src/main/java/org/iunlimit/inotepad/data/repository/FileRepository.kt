@@ -22,4 +22,8 @@ class FileRepository(
         fileDao.deleteData(fileData)
     }
 
+    fun searchData(query: String): LiveData<List<FileData>> {
+        return fileDao.searchData(query)
+    }
+
 }

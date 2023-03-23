@@ -24,4 +24,9 @@ interface FileDao {
     @Delete
     suspend fun deleteData(fileData: FileData)
 
+    @Query(
+        "SELECT * FROM file_data_table WHERE name LIKE :query OR content LIKE :query"
+    )
+    fun searchData(query: String): LiveData<List<FileData>>
+
 }

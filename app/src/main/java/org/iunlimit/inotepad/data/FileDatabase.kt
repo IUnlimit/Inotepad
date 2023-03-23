@@ -9,7 +9,7 @@ import org.iunlimit.inotepad.data.models.FileData
 
 @Database(
     entities = [FileData::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(
@@ -35,7 +35,7 @@ abstract class FileDatabase: RoomDatabase() {
                     context.applicationContext,
                     FileDatabase::class.java,
                     "file_database"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 return instance
             }
