@@ -22,7 +22,7 @@ enum class FileType(
     GO(".go", R.color.red),
     PY(".py", R.color.red),
 
-    UNKNOWN("", R.color.darkGray);
+    UNKNOWN(".html", R.color.darkGray);
 
     companion object {
 
