@@ -37,6 +37,13 @@
             app:exitAnim="@anim/to_right"
             app:popUpTo="@id/listFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_addFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/updateFragment"
@@ -53,5 +60,37 @@
         <argument
             android:name="currentItem"
             app:argType="org.iunlimit.inotepad.data.models.FileData" />
+        <action
+            android:id="@+id/action_updateFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="org.iunlimit.inotepad.fragments.preview.WebViewFragment"
+        android:label="fragment_webView" >
+        <action
+            android:id="@+id/action_webViewFragment_to_addFragment"
+            app:destination="@id/addFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popUpTo="@id/addFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="content"
+            app:argType="string" />
+        <argument
+            android:name="type"
+            app:argType="org.iunlimit.inotepad.data.models.FileType" />
+        <action
+            android:id="@+id/action_webViewFragment_to_updateFragment"
+            app:destination="@id/updateFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popUpTo="@id/updateFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

@@ -77,6 +77,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/add_linearLayout" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/add_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_preview"
+                app:backgroundTint="@color/teal_200"
+                app:layout_constraintBottom_toTopOf="@+id/add_check"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/add_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
