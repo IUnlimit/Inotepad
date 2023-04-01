@@ -23,11 +23,12 @@ import org.iunlimit.inotepad.fragments.setFont
 class UpdateFragment : Fragment() {
 
     private val viewModel: FileViewModel by viewModels()
-    private val sharedViewModel: SharedViewModel by viewModels()
     private val args by navArgs<UpdateFragmentArgs>()
 
     private var _binding: FragmentUpdateBinding? = null
     private val binding get() = _binding!!
+
+    private var tempData: FileData? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,15 +39,19 @@ class UpdateFragment : Fragment() {
         binding.args = args
 
         // Spinner item selected spinner
-        binding.currentFileTypeSpinner.adapter = FontArrayAdapter(requireContext(), R.id.spinner_layout, resources.getStringArray(R.array.file_type))
+//        binding.currentFileTypeSpinner.adapter = FontArrayAdapter(requireContext(), R.id.spinner_layout, resources.getStringArray(R.array.file_type))
 
-        // FloatingActionButton click listener
+        binding.updateMenuPreview.setOnClickListener {
+            if (!tempSaveData()) return@setOnClickListener
+            val action = UpdateFragmentDirections.actionUpdateFragmentToWebViewFragment(tempData!!.content, tempData!!.type)
+            findNavController().navigate(action)
+        }
+
         binding.updateMenuSave.setOnClickListener {
             if (!updateData()) return@setOnClickListener
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)
         }
 
-        // FloatingActionButton click listener
         binding.updateMenuDelete.setOnClickListener {
             needConfirmDeleteData(args.currentItem, viewModel, requireContext()) {
                 if (!it) return@needConfirmDeleteData
@@ -68,7 +73,7 @@ class UpdateFragment : Fragment() {
         _binding = null
     }
 
-    private fun updateData(): Boolean {
+    private fun tempSaveData(): Boolean {
         val filename = binding.currentFilenameEt.text.toString()
         val fileType = binding.currentFileTypeSpinner.selectedItem.toString()
         val content = binding.currentContentEt.text.toString()
@@ -81,8 +86,13 @@ class UpdateFragment : Fragment() {
             return false
         }
 
-        val fileData = FileData(args.currentItem.id, filename, FileType.parse(fileType), content, args.currentItem.filePath)
-        viewModel.updateData(fileData)
+        tempData = FileData(args.currentItem.id, filename, FileType.parse(fileType), content, args.currentItem.filePath)
+        return true
+    }
+
+    private fun updateData(): Boolean {
+        if (!tempSaveData()) return false
+        viewModel.updateData(tempData!!)
         MaterialDialog(requireContext()).show {
             title(R.string.update_success)
             positiveButton(R.string.ok)

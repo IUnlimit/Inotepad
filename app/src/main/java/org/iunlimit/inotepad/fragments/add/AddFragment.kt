@@ -2,6 +2,7 @@ package org.iunlimit.inotepad.fragments.add
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,6 @@ import org.iunlimit.inotepad.data.models.FileData
 import org.iunlimit.inotepad.data.models.FileType
 import org.iunlimit.inotepad.data.viewmodel.FileViewModel
 import org.iunlimit.inotepad.databinding.FragmentAddBinding
-import org.iunlimit.inotepad.fragments.FontArrayAdapter
 import org.iunlimit.inotepad.fragments.SharedViewModel
 import org.iunlimit.inotepad.fragments.setFont
 
@@ -26,6 +26,8 @@ class AddFragment : Fragment() {
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
 
+    private var tempData: FileData? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,9 +35,14 @@ class AddFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentAddBinding.inflate(inflater, container, false)
 
-        binding.fileTypeSpinner.adapter = FontArrayAdapter(requireContext(), R.id.spinner_layout, resources.getStringArray(R.array.file_type))
+//        binding.fileTypeSpinner.adapter = FontArrayAdapter(requireContext(), R.id.spinner_layout, resources.getStringArray(R.array.file_type))
 
-        // FloatingActionButton click listener
+        binding.addPreview.setOnClickListener {
+            if (!tempSaveData()) return@setOnClickListener
+            val action = AddFragmentDirections.actionAddFragmentToWebViewFragment(tempData!!.content, tempData!!.type)
+            findNavController().navigate(action)
+        }
+
         binding.addCheck.setOnClickListener {
             if (!insertData()) return@setOnClickListener
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
@@ -50,7 +57,7 @@ class AddFragment : Fragment() {
         setFont(requireView().findViewById(R.id.content_et))
     }
 
-    private fun insertData(): Boolean {
+    private fun tempSaveData(): Boolean {
         val filename = binding.filenameEt.text.toString()
         val fileType = binding.fileTypeSpinner.selectedItem.toString()
         val content = binding.contentEt.text.toString()
@@ -63,8 +70,13 @@ class AddFragment : Fragment() {
             return false
         }
 
-        val fileData = FileData(0, filename, FileType.parse(fileType), content, null)
-        viewModel.insertData(fileData)
+        tempData = FileData(0, filename, FileType.parse(fileType), content, null)
+        return true
+    }
+
+    private fun insertData(): Boolean {
+        if (!tempSaveData()) return false
+        viewModel.insertData(tempData!!)
         MaterialDialog(requireContext()).show {
             title(R.string.insert_success)
             positiveButton(R.string.ok)
