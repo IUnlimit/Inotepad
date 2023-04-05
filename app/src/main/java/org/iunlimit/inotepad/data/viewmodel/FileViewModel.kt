@@ -21,11 +21,15 @@ class FileViewModel(application: Application): AndroidViewModel(application) {
     private val repository: FileRepository = FileRepository(fileDao)
     val allData: LiveData<List<FileData>> = repository.allData
 
-    fun insertData(file: File) {
+    fun insertData(file: File, fileType: FileType) {
         assert(file.exists())
-        val content = FileInputStream(file).use {
-            it.readBytes().toString(charset)
-        }
+
+        val content = if (fileType.isTextType()) {
+            FileInputStream(file).use {
+                it.readBytes().toString(charset)
+            }
+        } else "[${fileType.value.substring(1).uppercase()}]"
+
         val takeIf = file.name.lastIndexOf('.').takeIf { it != -1 }
         val name = takeIf?.let { file.name.substring(0, it) } ?: file.name
         val type = takeIf?.let { file.name.substring(it) }.let { FileType.parse(it) }

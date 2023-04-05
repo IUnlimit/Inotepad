@@ -1,6 +1,7 @@
 package org.iunlimit.inotepad.fragments.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import com.molihuan.pathselector.listener.FileItemListener
 import com.molihuan.pathselector.utils.MConstants
 import com.molihuan.pathselector.utils.Mtools
 import org.iunlimit.inotepad.R
+import org.iunlimit.inotepad.data.models.FileType
 import org.iunlimit.inotepad.data.viewmodel.FileViewModel
 import org.iunlimit.inotepad.databinding.FragmentListBinding
 import org.iunlimit.inotepad.fragments.SharedViewModel
@@ -71,8 +73,8 @@ class ListFragment : Fragment() {
                         ): Boolean {
                             fragment?.dismiss()
                             val filePath = file?.path ?: return false
-                            importFile(filePath)
                             Mtools.toast("select file:\n$filePath")
+                            importFile(filePath)
                             return false
                         }
                     }
@@ -116,7 +118,27 @@ class ListFragment : Fragment() {
 
     private fun importFile(filePath: String) {
         val file = File(filePath)
-        viewModel.insertData(file)
+        val divIndex = filePath.lastIndexOf('/')
+        val typeSplitIndex = filePath.lastIndexOf('.')
+        val fileType = if (typeSplitIndex != -1 && typeSplitIndex > divIndex) {
+            FileType.parse(filePath.substring(typeSplitIndex))
+        } else FileType.UNKNOWN
+
+        if (fileType == FileType.UNKNOWN) {
+            MaterialDialog(requireContext()).show {
+                cornerRadius(16f)
+                title(R.string.unsupported_type)
+                message(R.string.unsupported_type_content)
+                positiveButton(R.string.confirm) {
+                    viewModel.insertData(file, FileType.UNKNOWN)
+                }
+                negativeButton(R.string.cancel)
+            }
+            return
+        }
+
+        viewModel.insertData(file, fileType)
+        Log.v("list", "Import with type $fileType")
     }
 
     private fun swipeToDelete(recyclerView: RecyclerView) {
@@ -137,6 +159,7 @@ class ListFragment : Fragment() {
 
     private fun searchData() {
         MaterialDialog(requireContext()).show {
+            cornerRadius(16f)
             title(R.string.search_title)
             val dialog = input(hintRes = R.string.search_tip)
             negativeButton(R.string.cancel)
