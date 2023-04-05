@@ -2,7 +2,6 @@ package org.iunlimit.inotepad.fragments.add
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,6 +63,7 @@ class AddFragment : Fragment() {
 
         if (TextUtils.isEmpty(filename) || TextUtils.isEmpty(content)) {
             MaterialDialog(requireContext()).show {
+                cornerRadius(16f)
                 title(R.string.not_null)
                 positiveButton(R.string.ok)
             }
@@ -78,6 +78,7 @@ class AddFragment : Fragment() {
         if (!tempSaveData()) return false
         viewModel.insertData(tempData!!)
         MaterialDialog(requireContext()).show {
+            cornerRadius(16f)
             title(R.string.insert_success)
             positiveButton(R.string.ok)
         }

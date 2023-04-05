@@ -16,8 +16,6 @@ import org.iunlimit.inotepad.data.models.FileData
 import org.iunlimit.inotepad.data.models.FileType
 import org.iunlimit.inotepad.data.viewmodel.FileViewModel
 import org.iunlimit.inotepad.databinding.FragmentUpdateBinding
-import org.iunlimit.inotepad.fragments.FontArrayAdapter
-import org.iunlimit.inotepad.fragments.SharedViewModel
 import org.iunlimit.inotepad.fragments.setFont
 
 class UpdateFragment : Fragment() {
@@ -80,6 +78,7 @@ class UpdateFragment : Fragment() {
 
         if (TextUtils.isEmpty(filename) || TextUtils.isEmpty(content)) {
             MaterialDialog(requireContext()).show {
+                cornerRadius(16f)
                 title(R.string.not_null)
                 positiveButton(R.string.ok)
             }
@@ -94,6 +93,7 @@ class UpdateFragment : Fragment() {
         if (!tempSaveData()) return false
         viewModel.updateData(tempData!!)
         MaterialDialog(requireContext()).show {
+            cornerRadius(16f)
             title(R.string.update_success)
             positiveButton(R.string.ok)
         }
@@ -104,6 +104,7 @@ class UpdateFragment : Fragment() {
 
         fun needConfirmDeleteData(fileData: FileData, viewModel: FileViewModel, ctx: Context, callback: ((Boolean) -> Unit)?) {
             MaterialDialog(ctx).show {
+                cornerRadius(16f)
                 title(R.string.delete_confirm)
                 message(text = "即将删除 '${fileData.name}' ！")
                 positiveButton(R.string.cancel) {
@@ -112,6 +113,7 @@ class UpdateFragment : Fragment() {
                 negativeButton(R.string.confirm) {
                     viewModel.deleteData(fileData)
                     MaterialDialog(ctx).show {
+                        cornerRadius(16f)
                         title(R.string.delete_success)
                         positiveButton(R.string.ok)
                     }
