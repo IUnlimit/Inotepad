@@ -6,8 +6,21 @@
     <string name="content">内容</string>
 
     <string-array name="file_type">
-        <item>.txt</item>
         <item>.md</item>
+        <!---->
+        <item>.png</item>
+        <item>.jpg</item>
+        <item>.jpeg</item>
+        <item>.gif</item>
+        <!---->
+        <item>.doc</item>
+        <item>.docx</item>
+        <item>.xls</item>
+        <item>.xlsx</item>
+        <item>.ppt</item>
+        <item>.pdf</item>
+        <!---->
+        <item>.txt</item>
         <item>.json</item>
         <item>.xml</item>
         <item>.html</item>
@@ -17,6 +30,8 @@
         <item>.h</item>
         <item>.go</item>
         <item>.py</item>
+        <!---->
+        <item>.blob</item>
     </string-array>
 
     <!-- dialog message -->
@@ -30,5 +45,6 @@
     <string name="delete_success">删除成功</string>
     <string name="search_title">搜索</string>
     <string name="search_tip">文件名称 or 内容</string>
-    <string name="search_empty_eror">搜索内容不能为空！</string>
+    <string name="unsupported_type">不支持的文件类型</string>
+    <string name="unsupported_type_content">是否以二进制类型导入该文件？\n(您也可以手动修改文件后缀后再次尝试导入)</string>
 </resources>
