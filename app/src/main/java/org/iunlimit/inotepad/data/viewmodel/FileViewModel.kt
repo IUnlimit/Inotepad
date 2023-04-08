@@ -24,7 +24,7 @@ class FileViewModel(application: Application): AndroidViewModel(application) {
     fun insertData(file: File, fileType: FileType) {
         assert(file.exists())
 
-        val content = if (fileType.isTextType()) {
+        val content = if (fileType.isEditable()) {
             FileInputStream(file).use {
                 it.readBytes().toString(charset)
             }

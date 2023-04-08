@@ -6,6 +6,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import org.iunlimit.inotepad.data.models.FileData
+import org.iunlimit.inotepad.data.models.FileType
 import org.iunlimit.inotepad.databinding.RowLayoutBinding
 import org.iunlimit.inotepad.fragments.list.ListFragmentDirections
 import org.iunlimit.inotepad.fragments.setFont
@@ -33,7 +34,20 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
         // Send data and action ListFragment to UpdateFragment
         holder.binding.rowBackground.setOnClickListener {
-            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(fileData)
+            if (fileData.type.isEditable()) {
+                val action = ListFragmentDirections.actionListFragmentToUpdateFragment(fileData)
+                holder.itemView.findNavController().navigate(action)
+                return@setOnClickListener
+            }
+
+            if (fileData.type == FileType.PDF) {
+                val action = ListFragmentDirections.actionListFragmentToPDFFragment(fileData)
+                holder.itemView.findNavController().navigate(action)
+                return@setOnClickListener
+            }
+
+            // uneditable type should be directly redirected
+            val action = ListFragmentDirections.actionListFragmentToWebViewFragment(fileData)
             holder.itemView.findNavController().navigate(action)
         }
     }

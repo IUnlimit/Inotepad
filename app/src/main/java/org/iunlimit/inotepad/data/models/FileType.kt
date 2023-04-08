@@ -6,7 +6,7 @@ import java.util.*
 enum class FileType(
     val value: String,
     val color: Int,
-    private val clazz: Short
+    val clazz: Short
 ) {
 
     MD(".md", R.color.red, MD_CLAZZ),
@@ -39,7 +39,7 @@ enum class FileType(
     /**
      * 类型是否可直接文本化
      * */
-    fun isTextType(): Boolean {
+    fun isEditable(): Boolean {
         return clazz <= MD_CLAZZ
     }
 
