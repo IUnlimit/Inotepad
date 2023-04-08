@@ -38,7 +38,7 @@ class AddFragment : Fragment() {
 
         binding.addPreview.setOnClickListener {
             if (!tempSaveData()) return@setOnClickListener
-            val action = AddFragmentDirections.actionAddFragmentToWebViewFragment(tempData!!.content, tempData!!.type)
+            val action = AddFragmentDirections.actionAddFragmentToWebViewFragment(tempData!!)
             findNavController().navigate(action)
         }
 

@@ -41,7 +41,7 @@ class UpdateFragment : Fragment() {
 
         binding.updateMenuPreview.setOnClickListener {
             if (!tempSaveData()) return@setOnClickListener
-            val action = UpdateFragmentDirections.actionUpdateFragmentToWebViewFragment(tempData!!.content, tempData!!.type)
+            val action = UpdateFragmentDirections.actionUpdateFragmentToWebViewFragment(tempData!!)
             findNavController().navigate(action)
         }
 
