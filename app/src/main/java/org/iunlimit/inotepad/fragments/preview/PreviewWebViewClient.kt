@@ -6,9 +6,12 @@ import android.util.Log
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import kotlinx.coroutines.DelicateCoroutinesApi
+import org.iunlimit.inotepad.fragments.preview.handler.TypeHandler
 
 class PreviewWebViewClient(
-    val fragment: WebViewFragment
+    val fragment: WebViewFragment,
+    val handler: TypeHandler
 ) : WebViewClient() {
 
     /**
@@ -39,9 +42,8 @@ class PreviewWebViewClient(
     override fun onPageFinished(view: WebView?, url: String?) {
         // 在 onPageFinished 回调里调用，表示页面加载好就调用
         view!!.post {
-            view.evaluateJavascript("javascript:setData(`${fragment.args.content}`, '${fragment.args.type.value.substring(1)}')") {
-                Log.d("MainActivity", "js返回的结果： $it")
-            }
+            val eval = view::evaluateJavascript
+            handler.invoke(fragment.args.fileData, eval)
         }
     }
 
