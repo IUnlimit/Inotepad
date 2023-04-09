@@ -43,7 +43,7 @@ android {
     }
 
     packagingOptions {
-        exclude 'META-INF/DEPENDENCIES'
+//        exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/LICENSE.txt'
@@ -54,7 +54,7 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -69,7 +69,7 @@ dependencies {
     implementation 'io.github.molihuan:pathselector:1.1.14'
     // pdf preview
     implementation 'com.wdeo3601:pdf-view:1.0.4'
-    // ftp lib
+    // chatgpt lib
     implementation 'com.github.plexpt:chatgpt:4.0.5'
 
     // aliyun oss
