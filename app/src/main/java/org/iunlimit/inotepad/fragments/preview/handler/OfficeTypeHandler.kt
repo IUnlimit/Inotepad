@@ -18,7 +18,7 @@ class OfficeTypeHandler(val context: Context): TypeHandler {
     ) {
         assert(fileData.filePath != null)
 
-        val oss = OSSHolder(context, sts)
+        val oss = OSSHolder(context, sts!!)
         val uuid = UUID.randomUUID().toString()
 
         oss.asyncUpload(uuid + fileData.type.value, fileData.filePath!!) {
@@ -33,6 +33,10 @@ class OfficeTypeHandler(val context: Context): TypeHandler {
                 }
             }
         }
+    }
+
+    override fun needNetWork(): Boolean {
+        return true
     }
 
     override fun getName(): String {

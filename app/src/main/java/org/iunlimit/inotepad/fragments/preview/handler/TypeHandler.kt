@@ -14,6 +14,13 @@ interface TypeHandler {
         eval: (script: String, resultCallback: ValueCallback<String>?) -> Unit
     )
 
+    /**
+     * 预览是否需要检查网络
+     * */
+    fun needNetWork(): Boolean {
+        return false
+    }
+
     fun getName(): String
 
     /**
