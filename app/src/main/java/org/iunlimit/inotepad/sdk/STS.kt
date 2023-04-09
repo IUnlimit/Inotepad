@@ -1,37 +1,31 @@
 package org.iunlimit.inotepad.sdk
 
-import com.aliyun.sts20150401.Client
-import com.aliyun.sts20150401.models.AssumeRoleRequest
-import com.aliyun.teaopenapi.models.Config
-import com.aliyun.teautil.models.RuntimeOptions
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+import okhttp3.*
+import java.io.IOException
 
-val sts = generateSTS()!!
+var sts: STS? = null
 
-fun generateSTS(): STS? {
-    val client = Client(
-        Config()
-            .setAccessKeyId(STS.accessKeyId)
-            .setAccessKeySecret(STS.accessKeySecret)
-            .setEndpoint(STS.endpoint)
-            .setRegionId(STS.regionId)
-    )
-    val request = AssumeRoleRequest()
-        .setRoleSessionName(STS.sessionName)
-        .setRoleArn(STS.arn)
-        .setDurationSeconds(STS.durationSeconds)
-    val runtime = RuntimeOptions()
-    try {
-        val response = client.assumeRoleWithOptions(request, runtime)
-        val credentials = response.body.credentials
-        return STS(
-            credentials.accessKeyId,
-            credentials.accessKeySecret,
-            credentials.securityToken
-        )
-    } catch (e: Exception) {
-        e.printStackTrace()
-    }
-    return null
+fun generateSTS() {
+    val url = "http://illtamer.com:28888?id=${STS.accessKeyId}&secret=${STS.accessKeySecret}";
+    val request = Request.Builder().url(url).get().build();
+    val client = OkHttpClient();
+    client.newCall(request).enqueue(object : Callback {
+        override fun onResponse(call: Call, resp: Response) {
+            val string = resp.body()!!.string()
+            val json = Gson().fromJson(string, JsonObject::class.java)
+            sts = STS(
+                json["AccessKeyId"].asString,
+                json["AccessKeySecret"].asString,
+                json["SecurityToken"].asString
+            )
+        }
+
+        override fun onFailure(call: Call, e: IOException) {
+            e.printStackTrace()
+        }
+    })
 }
 
 data class STS(
