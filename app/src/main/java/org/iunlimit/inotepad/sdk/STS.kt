@@ -1,9 +1,11 @@
-package org.iunlimit.inotepad.util
+package org.iunlimit.inotepad.sdk
 
 import com.aliyun.sts20150401.Client
 import com.aliyun.sts20150401.models.AssumeRoleRequest
 import com.aliyun.teaopenapi.models.Config
 import com.aliyun.teautil.models.RuntimeOptions
+
+val sts = generateSTS()!!
 
 fun generateSTS(): STS? {
     val client = Client(
@@ -47,4 +49,9 @@ data class STS(
         const val arn = "acs:ram::1839416139006702:role/sts-oss"
         const val durationSeconds = 60 * 60L // 1h
     }
+
+    override fun toString(): String {
+        return "STS(accessKeyId='$accessKeyId', accessKeySecret='$accessKeySecret', securityToken='$securityToken')"
+    }
+
 }

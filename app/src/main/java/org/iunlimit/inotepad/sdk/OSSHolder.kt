@@ -1,4 +1,4 @@
-package org.iunlimit.inotepad.util
+package org.iunlimit.inotepad.sdk
 
 import android.content.Context
 import android.util.Log
@@ -13,10 +13,14 @@ import com.alibaba.sdk.android.oss.internal.OSSAsyncTask
 import com.alibaba.sdk.android.oss.model.DeleteObjectRequest
 import com.alibaba.sdk.android.oss.model.DeleteObjectResult
 import com.alibaba.sdk.android.oss.model.PutObjectRequest
+import com.alibaba.sdk.android.oss.model.PutObjectResult
 
-class OSSHolder(context: Context) {
+class OSSHolder(
+    val context: Context,
+    val sts: STS
+) {
 
-    private var oss: OSS = create(context)
+    private var oss: OSS = create()
 
     fun upload(fileName: String, filePath: String): String {
         val put = PutObjectRequest(
@@ -28,6 +32,31 @@ class OSSHolder(context: Context) {
         val result = oss.putObject(put)
         Log.v("oss#upload", result.toString())
         return publicUrl + fileName
+    }
+
+    fun asyncUpload(fileName: String, filePath: String, success:(String) -> Unit) {
+        val put = PutObjectRequest(
+            bucketName,
+            baseUrl + fileName,
+            filePath
+        )
+
+        oss.asyncPutObject(put, object : OSSCompletedCallback<PutObjectRequest, PutObjectResult> {
+            override fun onSuccess(request: PutObjectRequest?, result: PutObjectResult?) {
+                Log.v("oss#upload", result.toString())
+                success.invoke(publicUrl + fileName)
+            }
+
+            override fun onFailure(
+                request: PutObjectRequest?,
+                clientException: ClientException?,
+                serviceException: ServiceException?
+            ) {
+                clientException?.printStackTrace()
+                serviceException?.printStackTrace()
+            }
+
+        })
     }
 
     fun delete(fileName: String): OSSAsyncTask<DeleteObjectResult>? {
@@ -54,8 +83,7 @@ class OSSHolder(context: Context) {
             })
     }
 
-    private fun create(context: Context): OSS {
-        val sts = generateSTS()!!
+    private fun create(): OSS {
         val credentialProvider: OSSCredentialProvider = OSSStsTokenCredentialProvider(
             sts.accessKeyId,
             sts.accessKeySecret,
