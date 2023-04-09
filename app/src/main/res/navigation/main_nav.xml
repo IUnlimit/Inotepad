@@ -103,5 +103,8 @@
         <argument
             android:name="fileData"
             app:argType="org.iunlimit.inotepad.data.models.FileData" />
+        <action
+            android:id="@+id/action_PDFFragment_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
 </navigation>
