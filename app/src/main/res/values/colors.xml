@@ -11,4 +11,25 @@
     <color name="lightGray">#d3d3d3</color>
     <color name="darkGray">#808080</color>
     <color name="red">#FF0000</color>
+
+    <color name="md">#389ee8</color>
+    <color name="json">#00786c</color>
+    <color name="xml">#b7dbff</color>
+    <color name="html">#fdfdfd</color>
+    <color name="js">#fea301</color>
+    <color name="java">#be3242</color>
+    <color name="c">#855ec5</color>
+    <color name="h">#79f57d</color>
+    <color name="go">#02addb</color>
+    <color name="py">#306897</color>
+
+    <color name="png">#1dca29</color>
+    <color name="jpg">#2bafd0</color>
+    <color name="gif">#b6bc1b</color>
+
+    <color name="doc">#285499</color>
+    <color name="xls">#207244</color>
+    <color name="ppt">#dd5c27</color>
+    <color name="pdf">#e10000</color>
+
 </resources>

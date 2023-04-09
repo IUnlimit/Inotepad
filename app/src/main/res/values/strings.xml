@@ -8,18 +8,6 @@
     <string-array name="file_type">
         <item>.md</item>
         <!---->
-        <item>.png</item>
-        <item>.jpg</item>
-        <item>.jpeg</item>
-        <item>.gif</item>
-        <!---->
-        <item>.doc</item>
-        <item>.docx</item>
-        <item>.xls</item>
-        <item>.xlsx</item>
-        <item>.ppt</item>
-        <item>.pdf</item>
-        <!---->
         <item>.txt</item>
         <item>.json</item>
         <item>.xml</item>
@@ -30,8 +18,20 @@
         <item>.h</item>
         <item>.go</item>
         <item>.py</item>
-        <!---->
-        <item>.blob</item>
+<!--        &lt;!&ndash;&ndash;&gt;-->
+<!--        <item>.png</item>-->
+<!--        <item>.jpg</item>-->
+<!--        <item>.jpeg</item>-->
+<!--        <item>.gif</item>-->
+<!--        &lt;!&ndash;&ndash;&gt;-->
+<!--        <item>.doc</item>-->
+<!--        <item>.docx</item>-->
+<!--        <item>.xls</item>-->
+<!--        <item>.xlsx</item>-->
+<!--        <item>.ppt</item>-->
+<!--        <item>.pdf</item>-->
+<!--        &lt;!&ndash;&ndash;&gt;-->
+<!--        <item>.blob</item>-->
     </string-array>
 
     <!-- dialog message -->
@@ -47,4 +47,7 @@
     <string name="search_tip">文件名称 or 内容</string>
     <string name="unsupported_type">不支持的文件类型</string>
     <string name="unsupported_type_content">是否以二进制类型导入该文件？\n(您也可以手动修改文件后缀后再次尝试导入)</string>
+    <string name="no_network">网络连接不可用，请检查！</string>
+    <string name="too_large">文件过大</string>
+    <string name="too_large_content">文件过大（超过1024KB），暂不支持导入</string>
 </resources>

@@ -9,30 +9,30 @@ enum class FileType(
     val clazz: Short
 ) {
 
-    MD(".md", R.color.red, MD_CLAZZ),
+    MD(".md", R.color.md, MD_CLAZZ),
 
-    PNG(".png", R.color.red, IMAGE_CLAZZ),
-    JPG(".jpg", R.color.red, IMAGE_CLAZZ),
-    JPEG(".jpeg", R.color.red, IMAGE_CLAZZ),
-    GIF(".gif", R.color.red, IMAGE_CLAZZ),
+    TXT(".txt", R.color.white, TXT_CLAZZ),
+    JSON(".json", R.color.json, CODE_CLAZZ),
+    XML(".xml", R.color.xml, CODE_CLAZZ),
+    HTML(".html", R.color.html, CODE_CLAZZ),
+    JS(".js", R.color.js, CODE_CLAZZ),
+    JAVA(".java", R.color.java, CODE_CLAZZ),
+    C(".c", R.color.c, CODE_CLAZZ),
+    H(".h", R.color.h, CODE_CLAZZ),
+    GO(".go", R.color.go, CODE_CLAZZ),
+    PY(".py", R.color.py, CODE_CLAZZ),
 
-    DOC(".doc", R.color.red, OFFICE_CLAZZ),
-    DOCX(".docx", R.color.red, OFFICE_CLAZZ),
-    XLS(".xls", R.color.red, OFFICE_CLAZZ),
-    XLSX(".xlsx", R.color.red, OFFICE_CLAZZ),
-    PPT(".ppt", R.color.red, OFFICE_CLAZZ),
-    PDF(".pdf", R.color.red, OFFICE_CLAZZ),
+    PNG(".png", R.color.png, IMAGE_CLAZZ),
+    JPG(".jpg", R.color.jpg, IMAGE_CLAZZ),
+    JPEG(".jpeg", R.color.jpg, IMAGE_CLAZZ),
+    GIF(".gif", R.color.gif, IMAGE_CLAZZ),
 
-    TXT(".txt", R.color.white, CODE_CLAZZ),
-    JSON(".json", R.color.red, CODE_CLAZZ),
-    XML(".xml", R.color.red, CODE_CLAZZ),
-    HTML(".html", R.color.red, CODE_CLAZZ),
-    JS(".js", R.color.red, CODE_CLAZZ),
-    JAVA(".java", R.color.red, CODE_CLAZZ),
-    C(".c", R.color.red, CODE_CLAZZ),
-    H(".h", R.color.red, CODE_CLAZZ),
-    GO(".go", R.color.red, CODE_CLAZZ),
-    PY(".py", R.color.red, CODE_CLAZZ),
+    DOC(".doc", R.color.doc, OFFICE_CLAZZ),
+    DOCX(".docx", R.color.doc, OFFICE_CLAZZ),
+    XLS(".xls", R.color.xls, OFFICE_CLAZZ),
+    XLSX(".xlsx", R.color.xls, OFFICE_CLAZZ),
+    PPT(".ppt", R.color.ppt, OFFICE_CLAZZ),
+    PDF(".pdf", R.color.pdf, OFFICE_CLAZZ),
 
     UNKNOWN(".blob", R.color.darkGray, BLOB_CLAZZ);
 
@@ -60,7 +60,8 @@ enum class FileType(
 }
 
 const val CODE_CLAZZ: Short = 0
-const val MD_CLAZZ: Short = 1
-const val IMAGE_CLAZZ: Short = 2
-const val OFFICE_CLAZZ: Short = 3
-const val BLOB_CLAZZ: Short = 4
+const val TXT_CLAZZ: Short = 1
+const val MD_CLAZZ: Short = 2
+const val IMAGE_CLAZZ: Short = 3
+const val OFFICE_CLAZZ: Short = 4
+const val BLOB_CLAZZ: Short = 5
