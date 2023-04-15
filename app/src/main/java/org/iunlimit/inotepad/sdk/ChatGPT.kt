@@ -1,40 +1,78 @@
 package org.iunlimit.inotepad.sdk
 
-import com.plexpt.chatgpt.ChatGPT
-import com.plexpt.chatgpt.entity.chat.ChatCompletion
-import com.plexpt.chatgpt.entity.chat.Message
-import com.plexpt.chatgpt.util.Proxys
+import com.kaopiz.kprogresshud.KProgressHUD
+import com.theokanning.openai.OpenAiApi
+import com.theokanning.openai.completion.chat.ChatCompletionRequest
+import com.theokanning.openai.completion.chat.ChatMessage
+import com.theokanning.openai.service.OpenAiService
+import com.theokanning.openai.service.OpenAiService.*
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.net.InetSocketAddress
+import java.net.Proxy
+import java.nio.charset.Charset
+import java.time.Duration
+import java.time.temporal.ChronoUnit
+import java.util.*
+import java.util.concurrent.TimeUnit
+
 
 class ChatGPT(
-    val ip: String = "127.0.0.1",
-    val port: Int = 7890
+    val ip: String?,
+    val port: Int?
 ) {
-
-    val client: ChatGPT = ChatGPT.builder()
-        .apiKey("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")
-        .proxy(Proxys.http(ip, port))
-        .apiHost("https://api.openai.com/") //反向代理地址
-        .build()
-        .init()
 
     /**
      * @param content code
      * */
-    fun analise(content: String, callback: (String) -> Unit) {
-        val system = Message.ofSystem(ANALISE_PROMPT)
-        val message = Message.of(content)
+    @OptIn(DelicateCoroutinesApi::class)
+    fun send(prompt: String, content: String, loading: KProgressHUD, callback: (String) -> Unit) {
+        GlobalScope.launch {
+            try {
+                val service = createService(Base64.getDecoder()
+                    .decode("c2stUWNOSUlpNVRRSzgyRDFoNlJ6c3hUM0JsYmtGSjV4M1Z6OU9WWURoSm5LZ1BSV3NE")
+                    .toString(Charset.forName("UTF8")))
 
-        val chatCompletion = ChatCompletion.builder()
-            .model(ChatCompletion.Model.GPT_3_5_TURBO.name)
-            .messages(listOf(system, message))
-            .maxTokens(3000)
-            .temperature(0.9)
+                val promptMessage = ChatMessage()
+                promptMessage.let {
+                    it.role = "system"
+                    it.content = prompt
+                }
+                val text = if (content.length > 3000) content.substring(0, 3000) else content
+                val contentMessage = ChatMessage()
+                contentMessage.let {
+                    it.role = "user"
+                    it.content = text
+                }
+
+                val resp = service.createChatCompletion(
+                    ChatCompletionRequest.builder().messages(listOf(promptMessage, contentMessage))
+                    .model("gpt-3.5-turbo")
+                    .maxTokens(3000)
+                    .temperature(0.9)
+                    .build()).choices[0].message.content
+
+                callback.invoke(resp)
+            } catch (e: Exception) {
+                callback.invoke("API访问异常：\n${e.stackTraceToString()}")
+            }
+            loading.dismiss()
+        }
+    }
+
+    private fun createService(token: String): OpenAiService {
+        val mapper = defaultObjectMapper()
+        val proxy = if (ip != null && port != null) Proxy(Proxy.Type.HTTP, InetSocketAddress(ip, port)) else null
+        val client = defaultClient(token, Duration.of(10, ChronoUnit.SECONDS))
+            .newBuilder()
+            .proxy(proxy)
+            .connectTimeout(15, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
             .build()
-        val response = client.chatCompletion(chatCompletion)
-        val res = response.choices[0].message
-        callback.invoke(res.content)
+        val retrofit = defaultRetrofit(client, mapper)
+        val api = retrofit.create(OpenAiApi::class.java)
+        return OpenAiService(api)
     }
 
 }
-
-const val ANALISE_PROMPT = "You are a code analysis engineer. I need you to carefully analyze the specific functions of the code I gave and explain the functions of the lines, methods, parameters, classes, etc. that you think are worth noting. Reply in Chinese"
