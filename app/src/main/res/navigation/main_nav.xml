@@ -30,6 +30,13 @@
         <action
             android:id="@+id/action_listFragment_to_PDFFragment"
             app:destination="@id/PDFFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_GPTFragment"
+            app:destination="@id/GPTFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -106,5 +113,17 @@
         <action
             android:id="@+id/action_PDFFragment_to_listFragment"
             app:destination="@id/listFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/GPTFragment"
+        android:name="org.iunlimit.inotepad.fragments.gpt.GPTFragment"
+        android:label="GPTFragment" >
+        <action
+            android:id="@+id/action_GPTFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
 </navigation>
