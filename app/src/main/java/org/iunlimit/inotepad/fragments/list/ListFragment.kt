@@ -22,6 +22,7 @@ import com.molihuan.pathselector.utils.MConstants
 import com.molihuan.pathselector.utils.Mtools
 import org.iunlimit.inotepad.R
 import org.iunlimit.inotepad.data.models.FileType
+import org.iunlimit.inotepad.data.models.IMAGE_CLAZZ
 import org.iunlimit.inotepad.data.viewmodel.FileViewModel
 import org.iunlimit.inotepad.databinding.FragmentListBinding
 import org.iunlimit.inotepad.fragments.SharedViewModel
@@ -53,6 +54,10 @@ class ListFragment : Fragment() {
 
         binding.menuCreate.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
+        }
+
+        binding.menuChatgpt.setOnClickListener {
+            findNavController().navigate(R.id.action_listFragment_to_GPTFragment)
         }
 
         binding.menuSearch.setOnClickListener {
@@ -107,11 +112,6 @@ class ListFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
-        // BUG 不响应 notifyItemChanged
-//        recyclerView.itemAnimator = SlideInUpAnimator().apply {
-//            addDuration = 300
-//        }
-
         // Swipe to delete
         swipeToDelete(recyclerView)
     }
@@ -123,6 +123,17 @@ class ListFragment : Fragment() {
         val fileType = if (typeSplitIndex != -1 && typeSplitIndex > divIndex) {
             FileType.parse(filePath.substring(typeSplitIndex))
         } else FileType.UNKNOWN
+
+        val sizeKB = file.length() / 1024
+        if (fileType.clazz != IMAGE_CLAZZ && sizeKB > 1024) {
+            MaterialDialog(requireContext()).show {
+                cornerRadius(16f)
+                title(R.string.too_large)
+                message(R.string.too_large_content)
+                positiveButton(R.string.confirm)
+            }
+            return
+        }
 
         if (fileType == FileType.UNKNOWN) {
             MaterialDialog(requireContext()).show {
