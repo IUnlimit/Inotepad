@@ -1,5 +1,6 @@
 package org.iunlimit.inotepad.sdk
 
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import okhttp3.*
@@ -8,7 +9,7 @@ import java.io.IOException
 var sts: STS? = null
 
 fun generateSTS() {
-    val url = "http://illtamer.com:28888?id=${STS.accessKeyId}&secret=${STS.accessKeySecret}";
+    val url = "http://illtamer.com:28888/?id=${STS.accessKeyId}&secret=${STS.accessKeySecret}";
     val request = Request.Builder().url(url).get().build();
     val client = OkHttpClient();
     client.newCall(request).enqueue(object : Callback {
@@ -20,6 +21,7 @@ fun generateSTS() {
                 json["AccessKeySecret"].asString,
                 json["SecurityToken"].asString
             )
+            Log.i("sts", "sts generate: $sts")
         }
 
         override fun onFailure(call: Call, e: IOException) {
