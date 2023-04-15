@@ -9,6 +9,7 @@ import org.iunlimit.inotepad.data.models.FileData
 import org.iunlimit.inotepad.data.models.FileType
 import org.iunlimit.inotepad.databinding.RowLayoutBinding
 import org.iunlimit.inotepad.fragments.list.ListFragmentDirections
+import org.iunlimit.inotepad.fragments.list.shareFile
 import org.iunlimit.inotepad.fragments.setFont
 
 class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
@@ -34,6 +35,12 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
         // Send data and action ListFragment to UpdateFragment
         holder.binding.rowBackground.setOnClickListener {
+            // TODO
+//            if (fileData.filePath != null) {
+//                shareFile(holder.itemView.context, fileData.filePath!!)
+//                return@setOnClickListener
+//            }
+
             if (fileData.type.isEditable()) {
                 val action = ListFragmentDirections.actionListFragmentToUpdateFragment(fileData)
                 holder.itemView.findNavController().navigate(action)

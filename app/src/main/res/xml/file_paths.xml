@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- ./files/ -->
+    <files-path path="/" name="files" />
+    <!--
+        如下路径是在：SDCard/Record/下面的文件
+    -->
+    <external-path name="Record" path="Record"/>
+</paths>
