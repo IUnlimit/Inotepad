@@ -55,8 +55,8 @@
                         android:background="@drawable/custom_input"
                         android:entries="@array/file_type"
                         android:parseType="@{args.currentItem.type.ordinal()}"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp" />
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp" />
                 </LinearLayout>
 
             </LinearLayout>

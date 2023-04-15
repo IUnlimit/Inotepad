@@ -71,6 +71,16 @@
             app:menu_showShadow="true">
 
             <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/menu_chatgpt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_chatgpt_white"
+                app:fab_colorNormal="@color/teal_200"
+                app:fab_colorPressed="@color/teal_700"
+                app:fab_label="ChatGPT"
+                app:fab_size="mini" />
+
+            <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/menu_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -1,6 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Inotepad</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="no_data">无数据</string>
     <string name="filename">文件名称</string>
     <string name="content">内容</string>
@@ -50,4 +49,14 @@
     <string name="no_network">网络连接不可用，请检查！</string>
     <string name="too_large">文件过大</string>
     <string name="too_large_content">文件过大（超过1024KB），暂不支持导入</string>
+    <string name="file_not_found">文件不存在</string>
+    <string name="select_file">Select File</string>
+    <string name="select_prompt">Select Prompt</string>
+    <string name="request">Request</string>
+    <string name="preview">Preview</string>
+    <string name="proxy">Proxy</string>
+    <string name="proxy_title">请输入代理服务器地址</string>
+    <string name="proxy_default">127.0.0.1:7890</string>
+    <string name="loading_label">请等待</string>
+    <string name="loading_detail_label">正在获取数据...</string>
 </resources>
