@@ -22,7 +22,7 @@ import org.iunlimit.inotepad.data.models.FileType
 import org.iunlimit.inotepad.data.models.MD_CLAZZ
 import org.iunlimit.inotepad.databinding.FragmentGptBinding
 import org.iunlimit.inotepad.fragments.setFont
-import org.iunlimit.inotepad.sdk.ChatGPT
+import org.iunlimit.inotepad.sdk.API2D
 import java.io.File
 import java.nio.charset.Charset
 
@@ -66,7 +66,7 @@ class GPTFragment: Fragment() {
         }
 
         binding.buttonRequest.setOnClickListener {
-            val gpt = ChatGPT(proxyPair?.first, proxyPair?.second)
+            val gpt = API2D(proxyPair?.first, proxyPair?.second)
             val loading = KProgressHUD.create(requireContext())
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setLabel(getString(R.string.loading_label))
