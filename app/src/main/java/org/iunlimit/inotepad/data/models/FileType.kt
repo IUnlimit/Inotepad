@@ -34,6 +34,9 @@ enum class FileType(
     PPT(".ppt", R.color.ppt, OFFICE_CLAZZ),
     PDF(".pdf", R.color.pdf, OFFICE_CLAZZ),
 
+    ZIP(".zip", R.color.zip, COMPRESS_CLAZZ),
+    RAR(".rar", R.color.rar, COMPRESS_CLAZZ),
+
     UNKNOWN(".blob", R.color.darkGray, BLOB_CLAZZ);
 
     /**
@@ -64,4 +67,5 @@ const val TXT_CLAZZ: Short = 1
 const val MD_CLAZZ: Short = 2
 const val IMAGE_CLAZZ: Short = 3
 const val OFFICE_CLAZZ: Short = 4
-const val BLOB_CLAZZ: Short = 5
+const val COMPRESS_CLAZZ: Short = 5
+const val BLOB_CLAZZ: Short = 6

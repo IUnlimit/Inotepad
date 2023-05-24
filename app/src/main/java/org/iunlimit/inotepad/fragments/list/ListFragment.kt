@@ -21,6 +21,7 @@ import com.molihuan.pathselector.listener.FileItemListener
 import com.molihuan.pathselector.utils.MConstants
 import com.molihuan.pathselector.utils.Mtools
 import org.iunlimit.inotepad.R
+import org.iunlimit.inotepad.data.models.COMPRESS_CLAZZ
 import org.iunlimit.inotepad.data.models.FileType
 import org.iunlimit.inotepad.data.models.IMAGE_CLAZZ
 import org.iunlimit.inotepad.data.viewmodel.FileViewModel
@@ -32,11 +33,11 @@ import org.iunlimit.inotepad.fragments.update.UpdateFragment
 import java.io.File
 
 
-class ListFragment : Fragment() {
+open class ListFragment : Fragment() {
 
     private val viewModel: FileViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by viewModels()
-    private val adapter: ListAdapter by lazy { ListAdapter() }
+    private val adapter: ListAdapter by lazy { ListAdapter(this) }
 
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
@@ -116,7 +117,7 @@ class ListFragment : Fragment() {
         swipeToDelete(recyclerView)
     }
 
-    private fun importFile(filePath: String) {
+    fun importFile(filePath: String) {
         val file = File(filePath)
         val divIndex = filePath.lastIndexOf('/')
         val typeSplitIndex = filePath.lastIndexOf('.')
@@ -125,7 +126,8 @@ class ListFragment : Fragment() {
         } else FileType.UNKNOWN
 
         val sizeKB = file.length() / 1024
-        if (fileType.clazz != IMAGE_CLAZZ && sizeKB > 1024) {
+        // pdf image排外 其他限制
+        if (fileType != FileType.PDF && !arrayOf(IMAGE_CLAZZ, COMPRESS_CLAZZ).contains(fileType.clazz) && sizeKB > 1024) {
             MaterialDialog(requireContext()).show {
                 cornerRadius(16f)
                 title(R.string.too_large)

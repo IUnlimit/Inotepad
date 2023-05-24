@@ -32,4 +32,7 @@
     <color name="ppt">#dd5c27</color>
     <color name="pdf">#e10000</color>
 
+    <color name="zip">#FFBB86FC</color>
+    <color name="rar">#FFBB86FC</color>
+
 </resources>

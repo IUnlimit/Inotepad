@@ -112,7 +112,11 @@
             app:argType="org.iunlimit.inotepad.data.models.FileData" />
         <action
             android:id="@+id/action_PDFFragment_to_listFragment"
-            app:destination="@id/listFragment" />
+            app:destination="@id/listFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/GPTFragment"

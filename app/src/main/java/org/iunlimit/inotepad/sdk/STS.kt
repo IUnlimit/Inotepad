@@ -13,8 +13,8 @@ fun generateSTS() {
     val request = Request.Builder().url(url).get().build();
     val client = OkHttpClient();
     client.newCall(request).enqueue(object : Callback {
-        override fun onResponse(call: Call, resp: Response) {
-            val string = resp.body()!!.string()
+        override fun onResponse(call: Call, response: Response) {
+            val string = response.body!!.string()
             val json = Gson().fromJson(string, JsonObject::class.java)
             sts = STS(
                 json["AccessKeyId"].asString,

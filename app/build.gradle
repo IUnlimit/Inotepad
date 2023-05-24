@@ -69,14 +69,12 @@ dependencies {
     implementation 'io.github.molihuan:pathselector:1.1.14'
     // pdf preview
     implementation 'com.wdeo3601:pdf-view:1.0.4'
-    // chatgpt lib
-    implementation 'com.theokanning.openai-gpt3-java:service:0.12.0'
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.14.2'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.2'
-
     // loading dialog
     implementation 'com.kaopiz:kprogresshud:1.0.2'
+    // compress
+    implementation 'com.github.RRatChet:Compress:0.0.1'
 
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
     implementation 'com.google.code.gson:gson:2.9.0'
 
     // aliyun oss
@@ -88,6 +86,7 @@ dependencies {
         var dialog_version = "3.3.0"
         implementation "com.afollestad.material-dialogs:core:$dialog_version"
         implementation "com.afollestad.material-dialogs:input:$dialog_version"
+        implementation "com.afollestad.material-dialogs:files:$dialog_version"
     }
 
     dependencies {

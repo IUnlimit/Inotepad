@@ -58,5 +58,7 @@
     <string name="proxy_title">请输入代理服务器地址</string>
     <string name="proxy_default">127.0.0.1:7890</string>
     <string name="loading_label">请等待</string>
-    <string name="loading_detail_label">正在获取数据...</string>
+    <string name="loading_detail_label">正在获取数据…</string>
+    <string name="compress_label">解压中</string>
+    <string name="compress_detail_label">请耐心等待…</string>
 </resources>

@@ -5,14 +5,18 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import org.iunlimit.inotepad.data.models.COMPRESS_CLAZZ
 import org.iunlimit.inotepad.data.models.FileData
 import org.iunlimit.inotepad.data.models.FileType
 import org.iunlimit.inotepad.databinding.RowLayoutBinding
+import org.iunlimit.inotepad.fragments.list.ListFragment
 import org.iunlimit.inotepad.fragments.list.ListFragmentDirections
-import org.iunlimit.inotepad.fragments.list.shareFile
 import org.iunlimit.inotepad.fragments.setFont
+import org.iunlimit.inotepad.fragments.preview.driver.Compress
 
-class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+class ListAdapter(
+    val listFragment: ListFragment
+): RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     var dataList = emptyList<FileData>()
 
@@ -50,6 +54,15 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
             if (fileData.type == FileType.PDF) {
                 val action = ListFragmentDirections.actionListFragmentToPDFFragment(fileData)
                 holder.itemView.findNavController().navigate(action)
+                return@setOnClickListener
+            }
+
+            if (fileData.type.clazz == COMPRESS_CLAZZ) {
+                val compress = Compress(fileData)
+                compress.selectFile(holder.binding.root.context) {
+                    listFragment.importFile(it.absolutePath)
+                }
+
                 return@setOnClickListener
             }
 
