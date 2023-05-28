@@ -56,6 +56,43 @@
             app:layout_constraintTop_toBottomOf="@+id/no_data_imageView" />
 
         <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/cloud_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="-72dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/menu"
+            app:menu_colorNormal="@color/teal_200"
+            app:menu_colorPressed="@color/teal_700"
+            app:menu_fab_size="normal"
+            app:menu_icon="@drawable/ic_cloud"
+            app:menu_showShadow="true">
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/cloud_menu_upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_cloud_upload"
+                app:fab_colorNormal="@color/teal_200"
+                app:fab_colorPressed="@color/teal_700"
+                app:fab_label="Upload"
+                app:fab_size="mini" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/cloud_menu_download"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_cloud_download"
+                app:fab_colorNormal="@color/teal_200"
+                app:fab_colorPressed="@color/teal_700"
+                app:fab_label="Download"
+                app:fab_size="mini" />
+
+        </com.github.clans.fab.FloatingActionMenu>
+
+        <com.github.clans.fab.FloatingActionMenu
             android:id="@+id/menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
