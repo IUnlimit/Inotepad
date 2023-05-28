@@ -1,7 +1,7 @@
 package org.iunlimit.inotepad.data.models
 
 import org.iunlimit.inotepad.R
-import java.util.*
+import java.util.Locale
 
 enum class FileType(
     val value: String,

@@ -2,7 +2,12 @@ package org.iunlimit.inotepad
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.j256.ormlite.dao.DaoManager
+import com.j256.ormlite.jdbc.JdbcConnectionSource
 import junit.framework.Assert.assertNotNull
+import org.iunlimit.inotepad.data.models.Backup
+import org.iunlimit.inotepad.data.models.Token
+import org.iunlimit.inotepad.data.viewmodel.daoSupplier
 import org.iunlimit.inotepad.sdk.STS
 import org.iunlimit.inotepad.sdk.generateSTS
 import org.junit.Test
@@ -10,6 +15,8 @@ import java.net.InetAddress
 import java.net.InetSocketAddress
 import java.net.Proxy
 import java.net.Socket
+import java.util.Date
+import java.util.UUID
 
 
 /**
@@ -39,6 +46,18 @@ class ExampleUnitTest {
 //            println(it)
 //        }
 //        Thread.sleep(100000)
+    }
+
+    @Test
+    fun db() {
+//        val source =
+//            JdbcConnectionSource("jdbc:mysql://47.117.136.149:2436/i_notepad")
+//        source.setUsername("root")
+//        source.setPassword("#IllTamer!")
+//        val tokenDao = DaoManager.createDao(source, Token::class.java)
+//        val backupDao = DaoManager.createDao(source, Backup::class.java)
+//        println(tokenDao.count())
+//        arrayOf(Token())
     }
 
 }

@@ -12,8 +12,17 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.afollestad.materialdialogs.MaterialDialog
 import org.iunlimit.inotepad.R
-import org.iunlimit.inotepad.data.models.*
-import org.iunlimit.inotepad.fragments.preview.handler.*
+import org.iunlimit.inotepad.data.models.CODE_CLAZZ
+import org.iunlimit.inotepad.data.models.IMAGE_CLAZZ
+import org.iunlimit.inotepad.data.models.MD_CLAZZ
+import org.iunlimit.inotepad.data.models.OFFICE_CLAZZ
+import org.iunlimit.inotepad.data.models.TXT_CLAZZ
+import org.iunlimit.inotepad.fragments.preview.handler.BlobTypeHandler
+import org.iunlimit.inotepad.fragments.preview.handler.CodeTypeHandler
+import org.iunlimit.inotepad.fragments.preview.handler.ImageTypeHandler
+import org.iunlimit.inotepad.fragments.preview.handler.MDTypeHandler
+import org.iunlimit.inotepad.fragments.preview.handler.OfficeTypeHandler
+import org.iunlimit.inotepad.fragments.preview.handler.TxtTypeHandler
 import org.iunlimit.inotepad.util.checkNetworkAvailable
 
 // 图片 -> vue#Image

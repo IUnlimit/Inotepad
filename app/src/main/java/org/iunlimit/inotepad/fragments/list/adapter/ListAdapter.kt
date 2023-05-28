@@ -11,11 +11,11 @@ import org.iunlimit.inotepad.data.models.FileType
 import org.iunlimit.inotepad.databinding.RowLayoutBinding
 import org.iunlimit.inotepad.fragments.list.ListFragment
 import org.iunlimit.inotepad.fragments.list.ListFragmentDirections
-import org.iunlimit.inotepad.fragments.setFont
 import org.iunlimit.inotepad.fragments.preview.driver.Compress
+import org.iunlimit.inotepad.fragments.setFont
 
 class ListAdapter(
-    val listFragment: ListFragment
+    private val listFragment: ListFragment
 ): RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     var dataList = emptyList<FileData>()

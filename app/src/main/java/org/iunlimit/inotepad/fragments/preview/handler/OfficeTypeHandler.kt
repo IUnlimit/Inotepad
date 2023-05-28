@@ -8,7 +8,7 @@ import android.webkit.ValueCallback
 import org.iunlimit.inotepad.data.models.FileData
 import org.iunlimit.inotepad.sdk.OSSHolder
 import org.iunlimit.inotepad.sdk.sts
-import java.util.*
+import java.util.UUID
 
 class OfficeTypeHandler(val context: Context): TypeHandler {
 

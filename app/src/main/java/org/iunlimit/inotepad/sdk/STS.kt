@@ -3,7 +3,11 @@ package org.iunlimit.inotepad.sdk
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import okhttp3.*
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 import java.io.IOException
 
 var sts: STS? = null

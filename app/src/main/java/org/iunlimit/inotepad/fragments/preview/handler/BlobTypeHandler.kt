@@ -5,7 +5,7 @@ import android.webkit.ValueCallback
 import org.iunlimit.inotepad.data.models.FileData
 import java.io.File
 import java.nio.charset.Charset
-import java.util.*
+import java.util.Base64
 
 object BlobTypeHandler: TypeHandler {
 

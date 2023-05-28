@@ -17,7 +17,7 @@ android {
         minSdk 29
         targetSdk 33
         versionCode 1
-        versionName "1.0"
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -61,6 +61,10 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // mysql（老版驱动，新版不支持） + orm
+    implementation 'mysql:mysql-connector-java:5.1.49'
+    implementation 'com.j256.ormlite:ormlite-jdbc:6.1'
 
 //    implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
     // 悬浮按钮菜单库

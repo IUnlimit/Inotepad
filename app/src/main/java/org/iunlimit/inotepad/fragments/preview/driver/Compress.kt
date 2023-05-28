@@ -29,6 +29,7 @@ class Compress(val fileData: FileData) {
             loading.dismiss()
 
             MaterialDialog(context).show {
+                cornerRadius(16f)
                 fileChooser(context, initialDirectory = dir) { _, file ->
                     // File selected
                     Log.v("compress", "Select ${file.name} (${file.totalSpace}) ${file.absolutePath}")

@@ -6,7 +6,6 @@ import android.util.Log
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import kotlinx.coroutines.DelicateCoroutinesApi
 import org.iunlimit.inotepad.fragments.preview.handler.TypeHandler
 
 class PreviewWebViewClient(
