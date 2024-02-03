@@ -63,7 +63,7 @@ class API2D(
             .header("Content-Type", "application/json")
             .header("Authorization", "Bearer $FORWARD_KEY")
             .url("https://openai.api2d.net/v1/chat/completions")
-            .post(body).build();
+            .post(body).build()
         val call = okHttpClient.newCall(request);
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
